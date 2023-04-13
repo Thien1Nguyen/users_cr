@@ -54,7 +54,7 @@ class User:
             LIMIT 1;
         """
         results = connectToMySQL(DATABASE).query_db(query)
-        return results[0]['id']
+        return results[0]#['id']
         
 
     @classmethod

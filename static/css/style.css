@@ -7,3 +7,7 @@
 body{
     background-color: black;
 }
+
+.bg-gundamBlue{
+    background-color: rgb(44,82,179) !important;
+}

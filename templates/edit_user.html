@@ -14,7 +14,7 @@
     <div class="container bg-dark p-3">
         <h1 class="text-light p-3">Edit {{user.first_name}} User Info</h1>
         <div>
-            <a href="/" class="me-3 btn btn-success">Home</a>
+            <a href="/" class="me-3 mb-4 btn btn-success">Home</a>
         </div>
         <form action="/update_user" method="POST">
             <div>
@@ -36,7 +36,7 @@
     
             <button type ="submit" class="btn btn-warning">Save Change!</button>
         </form>
-        <a href="/show_user/{{user.id}}" class="btn btn-dark btn-outline-light"> Show User</a>
+        <a href="/show_user/{{user.id}}" class="btn btn-dark btn-outline-light mt-4"> Show User</a>
     </div>
 </body>
 </html>

@@ -17,7 +17,7 @@ def index():
 @app.route('/create_user', methods=["POST"])
 def create_user():
     User.create(request.form)
-    newest_id = User.get_newest_user()
+    newest_id = User.get_newest_user()['id']
     
     return redirect(f'/show_user/{newest_id}')
 
