@@ -21,12 +21,73 @@ class User:
         # Iterate over the db results and create instances of friends with cls.
         if results:
             for user in results:
-                new_user = User(user)
+                new_user = cls(user)
                 users.append( new_user)
         
         return users
 
     @classmethod
+    def get_one(cls,id):
+
+        data = {
+            "id" : id
+        }
+
+        query = """
+
+            SELECT * FROM users
+            WHERE id = %(id)s;
+        """
+        results = connectToMySQL(DATABASE).query_db(query, data)
+
+        user = cls(results[0])
+
+        return user
+    
+    @classmethod
+    def get_newest_user(cls):
+
+        query = """
+
+            SELECT * FROM users
+            ORDER BY id DESC
+            LIMIT 1;
+        """
+        results = connectToMySQL(DATABASE).query_db(query)
+        return results[0]['id']
+        
+
+    @classmethod
     def create(cls,data):
-        query = "INSERT INTO users(first_name, last_name, email) VALUE(%(first_name)s,%(last_name)s,%(email)s)"
-        return connectToMySQL(DATABASE).query_db(query, data)
+        query = "INSERT INTO users(first_name, last_name, email) VALUE(%(first_name)s,%(last_name)s,%(email)s);"
+        return connectToMySQL(DATABASE).query_db(query, data);
+
+    @classmethod
+    def update(cls, data):
+
+        query = """
+            UPDATE users
+            SET
+            first_name = %(first_name)s,
+            last_name = %(last_name)s,
+            email = %(email)s
+            WHERE id = %(id)s;
+        """
+        print("I sent it!")
+        return connectToMySQL(DATABASE).query_db(query, data);
+    
+    @classmethod
+    def delete_user(cls, id):
+
+        data = {
+            "id" : id,
+        }
+
+        query = """
+
+            DELETE FROM users
+            WHERE id = %(id)s;
+
+        """
+
+        connectToMySQL(DATABASE).query_db(query, data);
